@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Design Colors -->
+    <color name="primary_purple">#6643C8</color> <!-- Buttons, Links -->
+    <color name="primary_purple_light">#EAE1FF</color> <!-- Logo Background -->
+    <color name="text_black">#111111</color> <!-- Titles -->
+    <color name="text_dark_gray">#333333</color> <!-- Input Text, Labels, OR -->
+    <color name="text_light_gray">#6C757D</color> <!-- Subtitles -->
+    <color name="background_light">#F8F9FA</color> <!-- Background behind the card -->
+    <color name="card_background">#FFFFFF</color> <!-- Card surface -->
+    <color name="input_border_color">#E6E6E6</color> <!-- Input outline -->
+    <color name="input_background">#FFFFFF</color>
+    <color name="divider_line">#E8E8E8</color>
 </resources>
