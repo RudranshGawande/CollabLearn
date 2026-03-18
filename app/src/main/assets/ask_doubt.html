@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f46e5",
+                        "background-light": "#ffffff",
+                        "surface": "#f8fafc",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-shadow {
+            box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.08); /* Updated shadow color to match indigo */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  </head>
+<body class="bg-background-light text-slate-900 min-h-screen flex flex-col font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-white">
+<!-- Top Bar -->
+<header class="sticky top-0 z-50 flex items-center p-4 bg-white/90 backdrop-blur-md border-b border-slate-100">
+<button onclick="Android.onBackClicked()" class="size-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="ml-4 text-xl font-bold tracking-tight text-slate-900">Ask a Doubt</h1>
+</header>
+<main class="flex-1 px-6 pb-24 overflow-y-auto">
+<!-- Info Card -->
+<div class="mt-6 mb-8 p-5 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+</div>
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-0.5">Quick Help</p>
+<p class="text-sm font-medium text-indigo-900">Peers and AI are ready to help you solve any problem.</p>
+</div>
+</div>
+<!-- Select Subject -->
+<div class="mb-6">
+<label class="block text-sm font-bold text-slate-700 mb-2 px-1">Select Subject</label>
+<div class="relative">
+    <select class="w-full h-14 pl-12 pr-10 appearance-none bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 transition-all font-semibold outline-none shadow-sm">
+        <option value="math">Mathematics</option>
+        <option value="physics">Physics</option>
+        <option value="chemistry">Chemistry</option>
+        <option value="biology">Biology</option>
+        <option value="other">Other Subjects</option>
+    </select>
+    <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+        <span class="material-symbols-outlined text-primary">auto_stories</span>
+    </div>
+    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+        <span class="material-symbols-outlined text-slate-400">expand_more</span>
+    </div>
+</div>
+</div>
+<!-- Your Doubt -->
+<div class="mb-6">
+<label class="block text-sm font-bold text-slate-700 mb-2 px-1">Detailed Description</label>
+<textarea class="w-full min-h-[160px] p-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 placeholder:text-slate-400 transition-all resize-none shadow-sm" placeholder="Type your doubt here... Be as specific as possible."></textarea>
+</div>
+<!-- Upload Image -->
+<div class="mb-8">
+<div class="relative">
+<input type="file" accept="image/*" class="sr-only" id="image-upload">
+<label for="image-upload" class="w-full flex items-center justify-center gap-3 h-16 border-2 border-dashed border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary group-hover:scale-110 transition-all">add_a_photo</span>
+<span class="font-bold text-slate-600 group-hover:text-primary transition-colors">Upload Image (Optional)</span>
+</label>
+</div>
+</div>
+<!-- AI Hint Toggle -->
+<div class="flex items-center justify-between p-4 bg-emerald-50 rounded-xl border border-emerald-100 mb-8">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-emerald-100 rounded-lg text-emerald-600">
+<span class="material-symbols-outlined text-[20px]">auto_fix_high</span>
+</div>
+<div>
+<p class="text-sm font-bold text-emerald-900">Get AI guidance first</p>
+<p class="text-[11px] text-emerald-700/80 font-medium leading-tight">Quick hints before a peer joins the session</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+</label>
+</div>
+</main>
+<!-- Bottom Navbar/CTA -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-5 bg-white/95 backdrop-blur-md border-t border-slate-100">
+<button class="w-full h-14 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">search</span>
+                Find Helper Now
+            </button>
+</div>
+</div>
+</body></html>
