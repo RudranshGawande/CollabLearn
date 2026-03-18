@@ -1,24 +1,24 @@
 package com.hackathon.collablearn;
 
 import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.JavascriptInterface;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.JavascriptInterface;
-import android.content.Intent;
 
-public class HomeActivity extends AppCompatActivity {
+public class AskDoubtActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_ask_doubt);
+        
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,12 +32,11 @@ public class HomeActivity extends AppCompatActivity {
         
         webView.addJavascriptInterface(new Object() {
             @JavascriptInterface
-            public void onAskDoubtClicked() {
-                Intent intent = new Intent(HomeActivity.this, AskDoubtActivity.class);
-                startActivity(intent);
+            public void onBackClicked() {
+                runOnUiThread(() -> finish());
             }
         }, "Android");
         
-        webView.loadUrl("file:///android_asset/replica.html");
+        webView.loadUrl("file:///android_asset/ask_doubt.html");
     }
 }
