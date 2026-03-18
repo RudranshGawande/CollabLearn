@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +31,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".AskDoubtActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".SmartHelperActivity" />
+        <activity android:name=".ProfileActivity" />
     </application>
 
 </manifest>
