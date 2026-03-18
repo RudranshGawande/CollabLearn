@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144743923354",
+    "project_id": "collablearn-00",
+    "storage_bucket": "collablearn-00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144743923354:android:7c66e83568e835f524a923",
+        "android_client_info": {
+          "package_name": "com.hackathon.collablearn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg9I0UAdF9c_GY7ryNZRFb_8VekvPa6KM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

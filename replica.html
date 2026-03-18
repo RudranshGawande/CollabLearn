@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DoubtSolve - Peer-to-Peer Learning</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4f46e5", // Updated to a vibrant purple/indigo for light mode
+                        "background-light": "#ffffff",
+                        "surface": "#f8fafc",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "1rem", // 16px
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 min-h-screen flex flex-col">
+<!-- Top Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-white/90 backdrop-blur-md border-b border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">school</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-900">DoubtSolve</h1>
+</div>
+<button class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</header>
+<main class="flex-1 pb-24">
+<!-- Hero Section -->
+<section class="px-6 pt-8 pb-6">
+<div class="mb-8">
+<h2 class="text-3xl font-extrabold mb-2 text-slate-900">Stuck on a problem?</h2>
+<p class="text-slate-600 font-medium">Get instant help from peers around the world.</p>
+</div>
+<div class="flex flex-col gap-4">
+<button class="flex items-center justify-center gap-3 w-full h-16 rounded-xl bg-primary text-white text-lg font-bold shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_circle</span>
+                    Ask a Doubt
+                </button>
+<button class="flex items-center justify-center gap-3 w-full h-16 rounded-xl bg-slate-100 text-slate-900 text-lg font-bold hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">volunteer_activism</span>
+                    Help Others
+                </button>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="px-6 mb-8">
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+<p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-1">Active Now</p>
+<p class="text-2xl font-black text-indigo-900">1,284</p>
+</div>
+<div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+<p class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">Solved Today</p>
+<p class="text-2xl font-black text-emerald-900">452</p>
+</div>
+</div>
+</section>
+<!-- Active Doubts Feed -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-slate-900">Active Doubts</h3>
+<button class="text-primary text-sm font-bold">View All</button>
+</div>
+<div class="space-y-4">
+<!-- Doubt Card 1 -->
+<div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+<div class="flex items-start justify-between mb-3">
+<span class="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-black uppercase tracking-wider">
+                            Mathematics
+                        </span>
+<span class="text-slate-400 text-xs font-medium">2m ago</span>
+</div>
+<p class="text-slate-800 font-semibold mb-4 leading-relaxed line-clamp-2">
+                        How do I find the derivative of f(x) = ln(x^2 + 5x)? I'm stuck on the chain rule part...
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-600">JD</div>
+<div class="size-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-500">+2</div>
+</div>
+<button class="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">Join</button>
+</div>
+</div>
+<!-- Doubt Card 2 -->
+<div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+<div class="flex items-start justify-between mb-3">
+<span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider">
+                            Physics
+                        </span>
+<span class="text-slate-400 text-xs font-medium">5m ago</span>
+</div>
+<p class="text-slate-800 font-semibold mb-4 leading-relaxed line-clamp-2">
+                        Can someone explain the difference between static and kinetic friction with a real-world example?
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-600">AS</div>
+</div>
+<button class="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">Join</button>
+</div>
+</div>
+<!-- Doubt Card 3 -->
+<div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+<div class="flex items-start justify-between mb-3">
+<span class="px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-[10px] font-black uppercase tracking-wider">
+                            Chemistry
+                        </span>
+<span class="text-slate-400 text-xs font-medium">12m ago</span>
+</div>
+<p class="text-slate-800 font-semibold mb-4 leading-relaxed line-clamp-2">
+                        Struggling with balancing this redox reaction in an acidic medium. Cr2O7(2-) + I- -&gt; Cr3+ + I2
+                    </p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full bg-slate-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-600">MK</div>
+<div class="size-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-500">PL</div>
+</div>
+<button class="px-6 py-2 rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">Join</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-slate-200 px-6 py-3">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">home</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">My Doubts</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Rankings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-black uppercase tracking-tighter">Settings</span>
+</a>
+</div>
+</nav>
+</body></html>
