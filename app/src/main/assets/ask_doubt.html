@@ -13,9 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#6D28D9", /* Violet-700 / Primary */
-                        "background-light": "#F8F7FF",
-                        "background-dark": "#121022",
+                        "primary": "#4f46e5",
+                        "background-light": "#ffffff",
+                        "surface": "#f8fafc",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
@@ -32,147 +32,179 @@
     </script>
 <style>
         .custom-shadow {
-            box-shadow: 0 4px 20px -2px rgba(109, 40, 217, 0.08);
+            box-shadow: 0 4px 20px -2px rgba(79, 70, 229, 0.08); /* Updated shadow color to match indigo */
         }
         body {
             font-family: 'Inter', sans-serif;
+            min-height: max(884px, 100dvh);
+            background-color: #ffffff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
   </head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900 dark:text-slate-100">
-<div class="max-w-md mx-auto min-h-screen flex flex-col bg-white dark:bg-slate-900 shadow-xl">
-<!-- TopAppBar -->
-<header class="flex items-center p-4 sticky top-0 bg-white dark:bg-slate-900 z-10">
-<button onclick="Android.onBackClicked()" class="size-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-<span class="material-symbols-outlined text-slate-700 dark:text-slate-200">arrow_back</span>
+<body class="bg-background-light text-slate-900 min-h-screen flex flex-col font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-white">
+<!-- Top Bar -->
+<header class="sticky top-0 z-50 flex items-center p-4 bg-white/90 backdrop-blur-md border-b border-slate-100">
+<button onclick="Android.onBackClicked()" class="size-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
 </button>
-<h1 class="ml-2 text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Ask a Doubt</h1>
+<h1 class="ml-4 text-xl font-bold tracking-tight text-slate-900">Ask a Doubt</h1>
 </header>
-<main class="flex-1 px-5 pb-24 overflow-y-auto">
-<!-- Illustration / Decorative Element -->
-<div class="mt-4 mb-8 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl flex items-center gap-4">
-<div class="bg-primary/20 p-3 rounded-full">
-<span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
+<main class="flex-1 px-6 pb-24 overflow-y-auto">
+<!-- Info Card -->
+<div class="mt-6 mb-8 p-5 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center gap-4">
+<div class="bg-primary/10 p-3 rounded-full">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
 </div>
 <div>
-<p class="text-sm font-semibold text-primary">Need help?</p>
-<p class="text-xs text-slate-500 dark:text-slate-400">Our experts and AI are ready to help you solve any problem.</p>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-0.5">Quick Help</p>
+<p class="text-sm font-medium text-indigo-900">Peers and AI are ready to help you solve any problem.</p>
 </div>
 </div>
-<!-- Select Subject -->
-<div class="mb-6">
-<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 px-1">Select Subject</label>
-<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm">
-<div class="space-y-3">
-<label class="flex items-center p-3 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer transition-all hover:bg-primary/10">
-<input type="radio" name="subject" value="math" checked class="sr-only peer">
-<div class="w-5 h-5 rounded-full border-2 border-primary peer-checked:bg-primary peer-checked:ring-2 peer-checked:ring-primary/20 flex items-center justify-center mr-3">
-<div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
+<!-- Select Subject (Custom Dropdown) -->
+<div class="mb-6" id="subject-dropdown-container">
+    <label class="block text-sm font-bold text-slate-700 mb-2 px-1">Select Subject</label>
+    <div class="relative">
+        <!-- Dropdown Trigger -->
+        <button id="dropdown-trigger" class="w-full h-16 flex items-center justify-between px-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary text-slate-900 transition-all outline-none shadow-sm group">
+            <div class="flex items-center gap-3">
+                <div id="selected-icon-container" class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-focus:scale-110 transition-transform">
+                    <span id="selected-icon" class="material-symbols-outlined">auto_stories</span>
+                </div>
+                <span id="selected-text" class="font-bold text-slate-700">Mathematics</span>
+            </div>
+            <span id="dropdown-arrow" class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+        </button>
+
+        <!-- Dropdown Options -->
+        <div id="dropdown-options" class="hidden absolute top-[calc(100%+8px)] left-0 right-0 bg-white border border-slate-100 rounded-2xl shadow-xl shadow-slate-200/50 z-[100] overflow-hidden transform origin-top transition-all duration-300 scale-95 opacity-0">
+            <div class="p-2 space-y-1">
+                <button onclick="selectSubject('math', 'Mathematics', 'function')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                            <span class="material-symbols-outlined">function</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Mathematics</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('physics', 'Physics', 'architecture')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600">
+                            <span class="material-symbols-outlined">architecture</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Physics</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('chemistry', 'Chemistry', 'science')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <span class="material-symbols-outlined">science</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Chemistry</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('biology', 'Biology', 'psychology')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-pink-50 flex items-center justify-center text-pink-600">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Biology</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('other', 'Other Subjects', 'more_horiz')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+                            <span class="material-symbols-outlined">more_horiz</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Other Subjects</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="flex items-center justify-between flex-1">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">calculate</span>
-<span class="font-semibold text-slate-900 dark:text-white">Mathematics</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">Algebra, Calculus, Geometry</span>
-</div>
-</label>
-<label class="flex items-center p-3 rounded-lg border-2 border-slate-200 dark:border-slate-600 cursor-pointer transition-all hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-700">
-<input type="radio" name="subject" value="physics" class="sr-only peer">
-<div class="w-5 h-5 rounded-full border-2 border-slate-400 peer-checked:border-primary peer-checked:bg-primary peer-checked:ring-2 peer-checked:ring-primary/20 flex items-center justify-center mr-3">
-<div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
-</div>
-<div class="flex items-center justify-between flex-1">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-blue-500">science</span>
-<span class="font-semibold text-slate-900 dark:text-white">Physics</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">Mechanics, Thermodynamics, Optics</span>
-</div>
-</label>
-<label class="flex items-center p-3 rounded-lg border-2 border-slate-200 dark:border-slate-600 cursor-pointer transition-all hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-700">
-<input type="radio" name="subject" value="chemistry" class="sr-only peer">
-<div class="w-5 h-5 rounded-full border-2 border-slate-400 peer-checked:border-primary peer-checked:bg-primary peer-checked:ring-2 peer-checked:ring-primary/20 flex items-center justify-center mr-3">
-<div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
-</div>
-<div class="flex items-center justify-between flex-1">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-green-500">biotech</span>
-<span class="font-semibold text-slate-900 dark:text-white">Chemistry</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">Organic, Inorganic, Physical</span>
-</div>
-</label>
-<label class="flex items-center p-3 rounded-lg border-2 border-slate-200 dark:border-slate-600 cursor-pointer transition-all hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-700">
-<input type="radio" name="subject" value="biology" class="sr-only peer">
-<div class="w-5 h-5 rounded-full border-2 border-slate-400 peer-checked:border-primary peer-checked:bg-primary peer-checked:ring-2 peer-checked:ring-primary/20 flex items-center justify-center mr-3">
-<div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
-</div>
-<div class="flex items-center justify-between flex-1">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-emerald-500">eco</span>
-<span class="font-semibold text-slate-900 dark:text-white">Biology</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">Botany, Zoology, Genetics</span>
-</div>
-</label>
-<label class="flex items-center p-3 rounded-lg border-2 border-slate-200 dark:border-slate-600 cursor-pointer transition-all hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-700">
-<input type="radio" name="subject" value="other" class="sr-only peer">
-<div class="w-5 h-5 rounded-full border-2 border-slate-400 peer-checked:border-primary peer-checked:bg-primary peer-checked:ring-2 peer-checked:ring-primary/20 flex items-center justify-center mr-3">
-<div class="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
-</div>
-<div class="flex items-center justify-between flex-1">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-orange-500">menu_book</span>
-<span class="font-semibold text-slate-900 dark:text-white">Other Subjects</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">Computer Science, Economics, etc.</span>
-</div>
-</label>
-</div>
-</div>
-</div>
+
+<script>
+    const dropdownTrigger = document.getElementById('dropdown-trigger');
+    const dropdownOptions = document.getElementById('dropdown-options');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    const selectedText = document.getElementById('selected-text');
+    const selectedIcon = document.getElementById('selected-icon');
+    let isOpen = false;
+
+    function toggleDropdown() {
+        isOpen = !isOpen;
+        if (isOpen) {
+            dropdownOptions.classList.remove('hidden');
+            setTimeout(() => {
+                dropdownOptions.classList.add('scale-100', 'opacity-100');
+                dropdownOptions.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+            dropdownArrow.style.transform = 'rotate(180deg)';
+        } else {
+            dropdownOptions.classList.add('scale-95', 'opacity-0');
+            dropdownOptions.classList.remove('scale-100', 'opacity-100');
+            dropdownArrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                dropdownOptions.classList.add('hidden');
+            }, 300);
+        }
+    }
+
+    function selectSubject(value, label, icon) {
+        selectedText.innerText = label;
+        selectedIcon.innerText = icon;
+        toggleDropdown();
+        // You can store the value in a hidden input if needed for form submission
+    }
+
+    dropdownTrigger.addEventListener('click', toggleDropdown);
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('subject-dropdown-container').contains(e.target) && isOpen) {
+            toggleDropdown();
+        }
+    });
+</script>
 <!-- Your Doubt -->
 <div class="mb-6">
-<label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 px-1">Your Doubt</label>
-<textarea class="w-full min-h-[180px] p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 dark:text-white placeholder:text-slate-400 transition-all resize-none" placeholder="Type your doubt here... Be as specific as possible."></textarea>
+<label class="block text-sm font-bold text-slate-700 mb-2 px-1">Detailed Description</label>
+<textarea class="w-full min-h-[160px] p-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 placeholder:text-slate-400 transition-all resize-none shadow-sm" placeholder="Type your doubt here... Be as specific as possible."></textarea>
 </div>
 <!-- Upload Image -->
 <div class="mb-8">
 <div class="relative">
 <input type="file" accept="image/*" class="sr-only" id="image-upload">
-<label for="image-upload" class="w-full flex flex-col items-center justify-center gap-3 h-20 border-2 border-dashed border-primary/40 bg-gradient-to-br from-primary/5 to-primary/10 hover:from-primary/10 hover:to-primary/20 rounded-xl transition-all cursor-pointer group">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">add_a_photo</span>
-<span class="font-semibold text-primary">Upload Image (Optional)</span>
-</div>
-<span class="text-xs text-slate-500 dark:text-slate-400">PNG, JPG up to 10MB</span>
+<label for="image-upload" class="w-full flex items-center justify-center gap-3 h-16 border-2 border-dashed border-slate-200 bg-slate-50 hover:bg-slate-100 rounded-xl transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary group-hover:scale-110 transition-all">add_a_photo</span>
+<span class="font-bold text-slate-600 group-hover:text-primary transition-colors">Upload Image (Optional)</span>
 </label>
 </div>
 </div>
 <!-- AI Hint Toggle -->
-<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 mb-8">
+<div class="flex items-center justify-between p-4 bg-emerald-50 rounded-xl border border-emerald-100 mb-8">
 <div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary">auto_fix_high</span>
+<div class="p-2 bg-emerald-100 rounded-lg text-emerald-600">
+<span class="material-symbols-outlined text-[20px]">auto_fix_high</span>
+</div>
 <div>
-<p class="text-sm font-bold text-slate-800 dark:text-slate-200">Get AI hint first</p>
-<p class="text-xs text-slate-500">Quick suggestions before a helper joins</p>
+<p class="text-sm font-bold text-emerald-900">Get AI guidance first</p>
+<p class="text-[11px] text-emerald-700/80 font-medium leading-tight">Quick hints before a peer joins the session</p>
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
 <input checked="" class="sr-only peer" type="checkbox" value=""/>
-<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
 </label>
 </div>
 </main>
-<!-- Bottom CTA -->
-<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800">
-<button class="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform active:scale-95">
+<!-- Bottom Navbar/CTA -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-5 bg-white/95 backdrop-blur-md border-t border-slate-100">
+<button class="w-full h-14 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
 <span class="material-symbols-outlined">search</span>
                 Find Helper Now
             </button>

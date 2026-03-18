@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.hackathon.collablearn" />
+                  <option name="mobileSdkAppId" value="1:144743923354:android:7c66e83568e835f524a923" />
+                  <option name="projectId" value="collablearn-00" />
+                  <option name="projectNumber" value="144743923354" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
