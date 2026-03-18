@@ -3,7 +3,10 @@ package com.hackathon.collablearn;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.webkit.JavascriptInterface;
+import android.graphics.Color;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,9 +29,16 @@ public class AskDoubtActivity extends AppCompatActivity {
         });
 
         WebView webView = findViewById(R.id.webview);
+        webView.setWebViewClient(new WebViewClient());
+
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowContentAccess(true);
+        
+        // Ensure webview has a background color
+        webView.setBackgroundColor(Color.WHITE);
         
         webView.addJavascriptInterface(new Object() {
             @JavascriptInterface

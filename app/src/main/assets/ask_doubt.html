@@ -36,6 +36,7 @@
         body {
             font-family: 'Inter', sans-serif;
             min-height: max(884px, 100dvh);
+            background-color: #ffffff;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -62,25 +63,112 @@
 <p class="text-sm font-medium text-indigo-900">Peers and AI are ready to help you solve any problem.</p>
 </div>
 </div>
-<!-- Select Subject -->
-<div class="mb-6">
-<label class="block text-sm font-bold text-slate-700 mb-2 px-1">Select Subject</label>
-<div class="relative">
-    <select class="w-full h-14 pl-12 pr-10 appearance-none bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-slate-900 transition-all font-semibold outline-none shadow-sm">
-        <option value="math">Mathematics</option>
-        <option value="physics">Physics</option>
-        <option value="chemistry">Chemistry</option>
-        <option value="biology">Biology</option>
-        <option value="other">Other Subjects</option>
-    </select>
-    <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-        <span class="material-symbols-outlined text-primary">auto_stories</span>
-    </div>
-    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-        <span class="material-symbols-outlined text-slate-400">expand_more</span>
+<!-- Select Subject (Custom Dropdown) -->
+<div class="mb-6" id="subject-dropdown-container">
+    <label class="block text-sm font-bold text-slate-700 mb-2 px-1">Select Subject</label>
+    <div class="relative">
+        <!-- Dropdown Trigger -->
+        <button id="dropdown-trigger" class="w-full h-16 flex items-center justify-between px-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary text-slate-900 transition-all outline-none shadow-sm group">
+            <div class="flex items-center gap-3">
+                <div id="selected-icon-container" class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-focus:scale-110 transition-transform">
+                    <span id="selected-icon" class="material-symbols-outlined">auto_stories</span>
+                </div>
+                <span id="selected-text" class="font-bold text-slate-700">Mathematics</span>
+            </div>
+            <span id="dropdown-arrow" class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+        </button>
+
+        <!-- Dropdown Options -->
+        <div id="dropdown-options" class="hidden absolute top-[calc(100%+8px)] left-0 right-0 bg-white border border-slate-100 rounded-2xl shadow-xl shadow-slate-200/50 z-[100] overflow-hidden transform origin-top transition-all duration-300 scale-95 opacity-0">
+            <div class="p-2 space-y-1">
+                <button onclick="selectSubject('math', 'Mathematics', 'function')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                            <span class="material-symbols-outlined">function</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Mathematics</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('physics', 'Physics', 'architecture')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-orange-50 flex items-center justify-center text-orange-600">
+                            <span class="material-symbols-outlined">architecture</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Physics</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('chemistry', 'Chemistry', 'science')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <span class="material-symbols-outlined">science</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Chemistry</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('biology', 'Biology', 'psychology')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-pink-50 flex items-center justify-center text-pink-600">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Biology</span>
+                    </div>
+                </button>
+                <button onclick="selectSubject('other', 'Other Subjects', 'more_horiz')" class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="size-9 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+                            <span class="material-symbols-outlined">more_horiz</span>
+                        </div>
+                        <span class="font-semibold text-slate-600 group-hover:text-slate-900">Other Subjects</span>
+                    </div>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
-</div>
+
+<script>
+    const dropdownTrigger = document.getElementById('dropdown-trigger');
+    const dropdownOptions = document.getElementById('dropdown-options');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    const selectedText = document.getElementById('selected-text');
+    const selectedIcon = document.getElementById('selected-icon');
+    let isOpen = false;
+
+    function toggleDropdown() {
+        isOpen = !isOpen;
+        if (isOpen) {
+            dropdownOptions.classList.remove('hidden');
+            setTimeout(() => {
+                dropdownOptions.classList.add('scale-100', 'opacity-100');
+                dropdownOptions.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+            dropdownArrow.style.transform = 'rotate(180deg)';
+        } else {
+            dropdownOptions.classList.add('scale-95', 'opacity-0');
+            dropdownOptions.classList.remove('scale-100', 'opacity-100');
+            dropdownArrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                dropdownOptions.classList.add('hidden');
+            }, 300);
+        }
+    }
+
+    function selectSubject(value, label, icon) {
+        selectedText.innerText = label;
+        selectedIcon.innerText = icon;
+        toggleDropdown();
+        // You can store the value in a hidden input if needed for form submission
+    }
+
+    dropdownTrigger.addEventListener('click', toggleDropdown);
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('subject-dropdown-container').contains(e.target) && isOpen) {
+            toggleDropdown();
+        }
+    });
+</script>
 <!-- Your Doubt -->
 <div class="mb-6">
 <label class="block text-sm font-bold text-slate-700 mb-2 px-1">Detailed Description</label>

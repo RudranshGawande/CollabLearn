@@ -77,7 +77,7 @@
 </div>
 </div>
 <!-- Login Button -->
-<button onclick="Android.onLoginClicked()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-100" data-purpose="primary-action-button" type="button">
+<button onclick="submitLogin()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-indigo-200 transition-all duration-200 active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-100" data-purpose="primary-action-button" type="button">
         Login
       </button>
 </form>
@@ -86,13 +86,24 @@
 <footer class="mt-8 text-center" data-purpose="navigation-footer">
 <p class="text-slate-500 text-sm">
         Don't have an account? 
-        <a class="text-indigo-600 font-bold hover:underline decoration-2 underline-offset-4" href="#">Sign Up</a>
+        <button onclick="Android.onSignupClicked()" class="text-indigo-600 font-bold hover:underline decoration-2 underline-offset-4">Sign Up</button>
 </p>
 </footer>
 <!-- END: FooterLinks -->
 </main>
 <!-- END: LoginContainer -->
 <script data-purpose="icon-initialization">
+    function submitLogin() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (email && password) {
+            Android.onLoginSubmitted(email, password);
+        } else {
+            alert('Please fill all fields');
+        }
+    }
+
     /* Initialize Lucide icons after DOM content is loaded */
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CollabLearn.iml" filepath="$PROJECT_DIR$/.idea/CollabLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CollabLearn.iml" filepath="$PROJECT_DIR$/.idea/modules/CollabLearn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CollabLearn.app.unitTest.iml" />
     </modules>
   </component>
 </project>
