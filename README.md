@@ -1,1 +1,1 @@
-﻿# CollabLearn.
+﻿# CollabLearn
